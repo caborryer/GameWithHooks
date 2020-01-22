@@ -18,7 +18,7 @@ function Board ({squares, onClick}){
         return (
             <Square
                 value={squares[i]}
-                onClick={  ()=>  onClick(i)}
+                onClick={()=>  onClick(i)}
             />
         );
     }
@@ -51,15 +51,15 @@ function Game () {
     const [xIsNext, setXIsNext] = useState(true)
 
     function handleClick(i) {
-        const history = history.slice(0, stepNumber + 1);
-        const current = history[history.length - 1];
+        const historyUpdate = history.slice(0, stepNumber + 1);
+        const current = historyUpdate[historyUpdate.length - 1];
         const squares = current.squares.slice();
         if (calculateWinner(squares) || squares[i]) {
             return;
         }
         squares[i] = xIsNext ? "X" : "O";
-        setHistory(history.concat([{squares: squares}]));
-        setStepNumber(history.length);
+        setHistory(historyUpdate.concat([{squares: squares}]));
+        setStepNumber(historyUpdate.length);
         setXIsNext(!xIsNext);
     }
 
@@ -69,10 +69,11 @@ function Game () {
 
     }
 
-    const current = history[stepNumber];
+    const historyUpdate = history;
+    const current = historyUpdate[stepNumber];
     const winner = calculateWinner(current.squares)
 
-    const moves = history.map((step, move) => {
+    const moves = historyUpdate.map((step, move) => {
         const desc = move ?
             'Go to move #' + move :
             'Go to game start';

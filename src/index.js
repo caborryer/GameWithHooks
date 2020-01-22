@@ -46,7 +46,7 @@ function Board ({squares, onClick}){
 }
 
 function Game () {
-    const [history, setHistory] = useState({squares: Array(9).fill(null)});
+    const [history, setHistory] = useState([{squares: Array(9).fill(null)}]);
     const [stepNumber, setStepNumber] = useState(0);
     const [xIsNext, setXIsNext] = useState(true)
 
